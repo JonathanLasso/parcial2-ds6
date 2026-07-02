@@ -5,7 +5,6 @@ import android.widget.Toast
 import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gestionordenescompras.adapter.ClientesAdapter
@@ -22,12 +21,11 @@ class GestionClientesActivity : AppCompatActivity() {
         registrarCliente()
         configurarBotonRegresar(binding.btnRegresar, MainActivity::class.java)
     }
-    // El truco para refrescar la lista al volver de otra pantalla
+    // Para refrescar la lista al volver de otra pantalla
     override fun onResume() {
         super.onResume()
         refrescarListaClientes()
     }
-
     // Función encargada de actualizar el adapter con datos frescos
     private fun refrescarListaClientes() {
         if (::clientesAdapter.isInitialized) {
@@ -79,7 +77,6 @@ class GestionClientesActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun confugurarListaClientes(){
         // Inicializamos el Adapter pasándole el Cursor crudo
         clientesAdapter = ClientesAdapter(
@@ -92,10 +89,11 @@ class GestionClientesActivity : AppCompatActivity() {
                 startActivity(intent)
             },
             onEliminarClick = {idCliente, nombreCliente ->
-                mostrarDialogoConfirmacion(idCliente,nombreCliente)
+                mostrarDialogoConfirmacion(idCliente,nombreCliente) {
+                    eliminarCliente(idCliente)
+                }
             }
         )
-
         binding.rvClientes.apply {
             layoutManager = LinearLayoutManager(this@GestionClientesActivity)
             adapter = clientesAdapter
@@ -106,27 +104,6 @@ class GestionClientesActivity : AppCompatActivity() {
         val db = admin.readableDatabase
         return db.rawQuery("SELECT * FROM clientes", null)
     }
-
-    private fun mostrarDialogoConfirmacion(id: Int, nombre: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Eliminar Cliente")
-        builder.setMessage("¿Estás seguro de que deseas eliminar a $nombre de la base de datos?")
-
-        // Si el usuario confirma la acción
-        builder.setPositiveButton("Eliminar") { dialog, _ ->
-            eliminarCliente(id)
-            dialog.dismiss()
-        }
-
-        // Si el usuario cancela
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val idialog = builder.create()
-        idialog.show()
-    }
-
     private fun eliminarCliente(id: Int) {
         val admin = AdministradorBD(this)
         val db = admin.writableDatabase
@@ -143,7 +120,6 @@ class GestionClientesActivity : AppCompatActivity() {
             Toast.makeText(this, "Error al intentar eliminar el cliente.", Toast.LENGTH_SHORT).show()
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         val admin = AdministradorBD(this)

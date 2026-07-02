@@ -8,7 +8,7 @@ class AdministradorBD(context: Context) : SQLiteOpenHelper (
     context,
     "gestionOrdenesCompras.db",
     null,
-    2
+    4
 ) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -40,7 +40,7 @@ class AdministradorBD(context: Context) : SQLiteOpenHelper (
                 fecha TEXT NOT NULL,
                 estado TEXT NOT NULL,
                 total REAL NOT NULL,
-                FOREIGN KEY(idCliente) REFERENCES clientes(id)
+                FOREIGN KEY(idCliente) REFERENCES clientes(id) ON DELETE CASCADE
                 )
             """.trimIndent()
         )
@@ -51,8 +51,8 @@ class AdministradorBD(context: Context) : SQLiteOpenHelper (
                 idOrden INTEGER,
                 idProducto INTEGER,
                 cantidad INTEGER NOT NULL,
-                FOREIGN KEY(idOrden) REFERENCES ordenes(id),
-                FOREIGN KEY(idProducto) REFERENCES productos(id)
+                FOREIGN KEY(idOrden) REFERENCES ordenes(id) ON DELETE CASCADE,
+                FOREIGN KEY(idProducto) REFERENCES productos(id) ON DELETE CASCADE
                 )
             """.trimIndent()
         )

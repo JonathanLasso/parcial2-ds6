@@ -13,12 +13,10 @@ class ProductosAdapter(private var cursor: Cursor?,
     class ProductoViewHolder(
         val binding: ItemProductoBinding
     ): RecyclerView.ViewHolder(binding.root)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductoViewHolder {
         val binding = ItemProductoBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ProductoViewHolder(binding)
     }
-
     override fun onBindViewHolder(holder: ProductoViewHolder, position: Int) {
         // Movemos el cursor a la posición exacta que el RecyclerView quiere dibujar
         if(cursor != null && cursor!!.moveToPosition(position)){

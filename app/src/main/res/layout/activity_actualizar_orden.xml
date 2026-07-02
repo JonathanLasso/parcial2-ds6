@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GestionOrdenesActivity">
+    tools:context=".ActualizarOrdenActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Registrar Orden"
+            android:text="Actualizar Orden"
             android:textSize="20sp"
             android:textStyle="bold"/>
 
@@ -24,31 +24,37 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Seleccionar Cliente:"
+            android:text="Cliente de la Orden:"
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spClientes"
+            android:id="@+id/spClientesModificar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="4dp" />
 
         <EditText
-            android:id="@+id/etFecha"
+            android:id="@+id/etFechaModificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="Fecha (Automática/Seleccionable)"
+            android:hint="Fecha de la Orden"
             android:focusable="false"
             android:clickable="true"
             android:inputType="date" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="#CCCCCC" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="Agregar Productos a la Orden"
+            android:text="Añadir más Productos"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -60,13 +66,13 @@
             android:textStyle="bold" />
 
         <Spinner
-            android:id="@+id/spProductos"
+            android:id="@+id/spProductosModificar"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="4dp" />
 
         <EditText
-            android:id="@+id/etCantidad"
+            android:id="@+id/etCantidadModificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -74,24 +80,24 @@
             android:inputType="number" />
 
         <Button
-            android:id="@+id/btnAgregarProducto"
+            android:id="@+id/btnAgregarProductoModificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Agregar Detalle de Orden" />
+            android:text="Agregar Producto al Detalle" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Detalles añadidos a esta orden:"
+            android:text="Detalles cargados / modificados:"
             android:textStyle="bold" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvDetallesActuales"
+            android:id="@+id/rvDetallesModificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="true"
+            android:nestedScrollingEnabled="false"
             tools:listitem="@layout/item_detalle_orden" />
 
         <LinearLayout
@@ -104,12 +110,12 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TOTAL GENERAL: "
+                android:text="TOTAL ACTUALIZADO: "
                 android:textStyle="bold"
                 android:textSize="16sp"/>
 
             <TextView
-                android:id="@+id/tvTotalGeneral"
+                android:id="@+id/tvTotalGeneralModificar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="$0.00"
@@ -119,46 +125,17 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnGuardarOrden"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Guardar Orden" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Historial de Órdenes"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvOrdenesHistorial"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:nestedScrollingEnabled="true"
-            tools:listitem="@layout/item_orden" />
-
-        <TextView
-            android:id="@+id/tvOrdenesVacias"
+            android:id="@+id/btnActualizarOrden"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:gravity="center"
-            android:text="No hay órdenes registradas."
-            android:textColor="#757575"
-            android:textSize="16sp"
-            android:textStyle="italic"
-            android:visibility="gone" />
-
+            android:text="Guardar Cambios de la Orden" />
         <Button
-            android:id="@+id/btnRegresarAlMenu"
+            android:id="@+id/btnRegresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Regresar al menú principal" />
+            android:layout_marginTop="24dp"
+            android:text="Regresar a la gestión de órdenes" />
+
     </LinearLayout>
 </ScrollView>

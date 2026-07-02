@@ -5,7 +5,6 @@ import android.widget.Toast
 import android.content.ContentValues
 import android.content.Intent
 import android.database.Cursor
-import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gestionordenescompras.adapter.ProductosAdapter
@@ -22,7 +21,7 @@ class GestionProductosActivity : AppCompatActivity() {
         registrarProducto()
         configurarBotonRegresar(binding.btnRegresar, MainActivity::class.java)
     }
-    // El truco para refrescar la lista al volver de otra pantalla
+    // Para refrescar la lista al volver de otra pantalla
     override fun onResume() {
         super.onResume()
         refrescarListaProductos()
@@ -73,7 +72,6 @@ class GestionProductosActivity : AppCompatActivity() {
                     binding.etNombre.text.clear()
                     binding.etDescripcion.text.clear()
                     binding.etPrecio.text.clear()
-
                     // Actualizamos el adaptador con un Cursor nuevo
                     refrescarListaProductos()
                 }
@@ -83,7 +81,6 @@ class GestionProductosActivity : AppCompatActivity() {
             }
         }
     }
-
     private fun configurarListaProductos(){
         // Inicializamos el Adapter pasándole el Cursor crudo
         productosAdapter = ProductosAdapter(
@@ -95,7 +92,9 @@ class GestionProductosActivity : AppCompatActivity() {
                 startActivity(intent)
             },
             onEliminarClick = {idProducto, nombreProducto ->
-                mostrarDialogoConfirmacion(idProducto,nombreProducto)
+                mostrarDialogoConfirmacion(idProducto,nombreProducto){
+                    eliminarProducto(idProducto)
+                }
             }
         )
         binding.rvProductos.apply {
@@ -103,8 +102,7 @@ class GestionProductosActivity : AppCompatActivity() {
             adapter = productosAdapter
         }
     }
-
-    private fun eliminarCliente(id: Int){
+    private fun eliminarProducto(id: Int){
         val admin = AdministradorBD(this)
         val db = admin.writableDatabase
         // Ejecutamos el delete usando la cláusula WHERE basada en el ID
@@ -118,26 +116,6 @@ class GestionProductosActivity : AppCompatActivity() {
         } else {
             Toast.makeText(this, "Error al intentar eliminar un producto.", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun mostrarDialogoConfirmacion(id: Int, nombre: String) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Eliminar Producto")
-        builder.setMessage("¿Estás seguro de que deseas eliminar a $nombre de la base de datos?")
-
-        // Si el usuario confirma la acción
-        builder.setPositiveButton("Eliminar") { dialog, _ ->
-            eliminarCliente(id)
-            dialog.dismiss()
-        }
-
-        // Si el usuario cancela
-        builder.setNegativeButton("Cancelar") { dialog, _ ->
-            dialog.dismiss()
-        }
-
-        val idialog = builder.create()
-        idialog.show()
     }
     override fun onDestroy() {
         super.onDestroy()
