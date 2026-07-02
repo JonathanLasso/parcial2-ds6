@@ -1,7 +1,6 @@
 package com.example.gestionordenescompras
 
 import android.content.ContentValues
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -27,8 +26,7 @@ class ActualizarClienteActivity : AppCompatActivity() {
             finish()
         }
         actualizarCliente()
-        salirConFlecha()
-        salirConBoton()
+        configurarBotonRegresar(binding.btnSalir,GestionClientesActivity::class.java)
     }
 
     private fun cargarDatosCliente() {
@@ -89,21 +87,6 @@ class ActualizarClienteActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this, "Error al actualizar los datos.", Toast.LENGTH_SHORT).show()
             }
-        }
-    }
-
-    private fun salirConFlecha(){
-        binding.btnSalirflecha.setOnClickListener {
-            val intent = Intent(this, GestionClientesActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-    private fun salirConBoton(){
-        binding.btnSalir.setOnClickListener {
-            val intent = Intent(this, GestionClientesActivity::class.java)
-            startActivity(intent)
-            finish()
         }
     }
 }

@@ -41,7 +41,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Precio del producto"/>
+            android:hint="Precio del producto"
+            android:inputType="numberDecimal"/>
 
         <Button
             android:id="@+id/btnGuardar"
@@ -77,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
-            tools:listitem="@layout/item_cliente" />
+            tools:listitem="@layout/item_producto" />
 
         <TextView
             android:id="@+id/tvListaVacia"

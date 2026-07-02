@@ -20,7 +20,7 @@ class GestionClientesActivity : AppCompatActivity() {
         setContentView(binding.root)
         confugurarListaClientes()
         registrarCliente()
-        regresarAlMenuPrincipal()
+        configurarBotonRegresar(binding.btnRegresar, MainActivity::class.java)
     }
     // El truco para refrescar la lista al volver de otra pantalla
     override fun onResume() {
@@ -70,12 +70,11 @@ class GestionClientesActivity : AppCompatActivity() {
                     binding.etCorreo.text.clear()
                     binding.etTelefono.text.clear()
                     binding.etDireccion.text.clear()
-                    // ¡Actualizamos el Adapter con un Cursor nuevo!
+                    // Actualizamos el Adapter con un Cursor nuevo
                     refrescarListaClientes()
                 }
                 else{
                     Toast.makeText(applicationContext, "Los datos no se guardaron correctamente.", Toast.LENGTH_SHORT).show()
-
                 }
             }
         }
@@ -142,14 +141,6 @@ class GestionClientesActivity : AppCompatActivity() {
             refrescarListaClientes()
         } else {
             Toast.makeText(this, "Error al intentar eliminar el cliente.", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun regresarAlMenuPrincipal(){
-        binding.btnRegresar.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
         }
     }
 
