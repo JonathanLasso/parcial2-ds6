@@ -30,9 +30,8 @@ class ActualizarOrdenActivity : AppCompatActivity() {
             configurarListaEdicion()
             cargarDetallesExistentesDB()
             configurarAccionesEdicion()
-            binding.btnRegresar.setOnClickListener {
-                val intent = Intent(this, GestionOrdenesActivity::class.java)
-                startActivity(intent)
+            
+            binding.toolbar.setNavigationOnClickListener {
                 finish()
             }
         } else {

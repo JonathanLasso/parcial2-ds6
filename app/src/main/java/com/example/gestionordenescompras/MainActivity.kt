@@ -15,22 +15,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configuracionBotones(){
-        binding.btnCliente.setOnClickListener {
+        binding.cardClientes.setOnClickListener {
             val intent = Intent(this, GestionClientesActivity::class.java)
             startActivity(intent)
-            finish()
         }
-        binding.btnProducto.setOnClickListener {
+        binding.cardProductos.setOnClickListener {
             val intent = Intent(this, GestionProductosActivity::class.java)
             startActivity(intent)
-            finish()
         }
-        binding.btnOrden.setOnClickListener {
+        binding.cardOrdenes.setOnClickListener {
             val intent = Intent(this, GestionOrdenesActivity::class.java)
             startActivity(intent)
-            finish()
         }
-        binding.btnSalirApp.setOnClickListener {
+        binding.cardSalir.setOnClickListener {
             finishAffinity()
         }
     }

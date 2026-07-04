@@ -16,17 +16,22 @@ class ActualizarClienteActivity : AppCompatActivity() {
         binding = ActivityActualizarClienteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // 1. Recuperar el ID del cliente enviado desde GestionClientesActivity
         clienteId = intent.getIntExtra("CLIENTE_ID", -1)
 
         if (clienteId != -1) {
             cargarDatosCliente()
+            binding.tvTituloPantalla.text = "Actualizar Cliente"
+            binding.btnActualizar.text = "Actualizar"
         } else {
-            Toast.makeText(this, "Error al cargar el cliente", Toast.LENGTH_SHORT).show()
+            binding.tvTituloPantalla.text = "Registrar Cliente"
+            binding.btnActualizar.text = "Guardar"
+        }
+        
+        configurarBotonAccion()
+        
+        binding.toolbar.setNavigationOnClickListener {
             finish()
         }
-        actualizarCliente()
-        configurarBotonRegresar(binding.btnSalir,GestionClientesActivity::class.java)
     }
 
     private fun cargarDatosCliente() {
@@ -35,7 +40,6 @@ class ActualizarClienteActivity : AppCompatActivity() {
         val cursor = db.rawQuery("SELECT * FROM clientes WHERE id = ?", arrayOf(clienteId.toString()))
 
         if (cursor.moveToFirst()) {
-            // Extraer datos usando el índice de la columna
             val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
             val correo = cursor.getString(cursor.getColumnIndexOrThrow("correo"))
             val telefono = cursor.getString(cursor.getColumnIndexOrThrow("telefono"))
@@ -44,15 +48,12 @@ class ActualizarClienteActivity : AppCompatActivity() {
             binding.etCorreo.setText(correo)
             binding.etTelefono.setText(telefono)
             binding.etDireccion.setText(direccion)
-        } else {
-            Toast.makeText(this, "No se encontró el cliente.", Toast.LENGTH_SHORT).show()
-            finish()
         }
         cursor.close()
         db.close()
     }
 
-    private fun actualizarCliente() {
+    private fun configurarBotonAccion() {
         binding.btnActualizar.setOnClickListener {
             val nombre = binding.etNombre.text.toString().trim()
             val correo = binding.etCorreo.text.toString().trim()
@@ -61,32 +62,39 @@ class ActualizarClienteActivity : AppCompatActivity() {
 
             if (nombre.isEmpty() || correo.isEmpty() || telefono.isEmpty() || direccion.isEmpty()) {
                 Toast.makeText(this, "No se permiten campos vacíos.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
 
             val admin = AdministradorBD(this)
             val db = admin.writableDatabase
 
-            val valoresNuevos = ContentValues().apply {
+            val valores = ContentValues().apply {
                 put("nombre", nombre)
                 put("correo", correo)
                 put("telefono", telefono)
                 put("direccion", direccion)
             }
 
-            // Modificar la fila correspondiente en la base de datos
-            val filasAfectadas = db.update(
-                "clientes",
-                valoresNuevos,
-                "id = ?",
-                arrayOf(clienteId.toString())
-            )
-            db.close()
-
-            if (filasAfectadas > 0) {
-                Toast.makeText(this, "Cliente actualizado con éxito.", Toast.LENGTH_SHORT).show()
+            if (clienteId != -1) {
+                // Modo Actualizar
+                val filasAfectadas = db.update("clientes", valores, "id = ?", arrayOf(clienteId.toString()))
+                if (filasAfectadas > 0) {
+                    Toast.makeText(this, "Cliente actualizado con éxito.", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Error al actualizar los datos.", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "Error al actualizar los datos.", Toast.LENGTH_SHORT).show()
+                // Modo Registrar
+                val resultado = db.insert("clientes", null, valores)
+                if (resultado != -1L) {
+                    Toast.makeText(this, "Cliente registrado con éxito.", Toast.LENGTH_SHORT).show()
+                    finish()
+                } else {
+                    Toast.makeText(this, "Error al guardar el cliente.", Toast.LENGTH_SHORT).show()
+                }
             }
+            db.close()
         }
     }
 }

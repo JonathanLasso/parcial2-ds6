@@ -8,8 +8,8 @@ import com.example.gestionordenescompras.databinding.ItemClienteBinding
 
 class ClientesAdapter(
     private var cursor: Cursor?,
-    private val onClienteClick: (Int) -> Unit, // Ahora devolvemos solo el ID (Int)
-    private val onEliminarClick: (Int, String) -> Unit //Recibe: ID y Nombre del cliente para el mensaje
+    private val onClienteClick: (Int) -> Unit,
+    private val onEliminarClick: (Int, String) -> Unit
 ) : RecyclerView.Adapter<ClientesAdapter.ClienteViewHolder>() {
 
     class ClienteViewHolder(val binding: ItemClienteBinding) : RecyclerView.ViewHolder(binding.root)
@@ -20,29 +20,26 @@ class ClientesAdapter(
     }
 
     override fun onBindViewHolder(holder: ClienteViewHolder, position: Int) {
-        // Movemos el cursor a la posición exacta que el RecyclerView quiere dibujar
         if (cursor != null && cursor!!.moveToPosition(position)) {
-
-            // Extraemos los datos directamente de las columnas
             val id = cursor!!.getInt(cursor!!.getColumnIndexOrThrow("id"))
             val nombre = cursor!!.getString(cursor!!.getColumnIndexOrThrow("nombre"))
             val correo = cursor!!.getString(cursor!!.getColumnIndexOrThrow("correo"))
             val telefono = cursor!!.getString(cursor!!.getColumnIndexOrThrow("telefono"))
-            val direccion = cursor!!.getString(cursor!!.getColumnIndexOrThrow("direccion"))
 
-            // Pintamos la vista
             holder.binding.tvNombre.text = nombre
             holder.binding.tvCorreo.text = correo
             holder.binding.tvTelefono.text = telefono
-            holder.binding.tvDireccion.text = direccion
 
-            // Evento click: mandamos el ID extraído del Cursor
             holder.binding.root.setOnClickListener {
                 onClienteClick(id)
             }
-            // Evento click: para eliminar
+            
+            holder.binding.btnEditar.setOnClickListener {
+                onClienteClick(id)
+            }
+            
             holder.binding.btnEliminar.setOnClickListener {
-                onEliminarClick(id,nombre)
+                onEliminarClick(id, nombre)
             }
         }
     }
@@ -51,13 +48,10 @@ class ClientesAdapter(
         return cursor?.count ?: 0
     }
 
-    // Función para refrescar el RecyclerView cuando agregas un cliente nuevo
     fun cambiarCursor(nuevoCursor: Cursor?) {
         if (cursor == nuevoCursor) return
-        cursor?.close() // Cerramos el cursor viejo para liberar memoria
+        cursor?.close()
         cursor = nuevoCursor
-        if (nuevoCursor != null) {
-            notifyDataSetChanged()
-        }
+        notifyDataSetChanged()
     }
 }
