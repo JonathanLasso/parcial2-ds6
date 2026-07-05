@@ -6,8 +6,7 @@
     android:paddingHorizontal="12dp"
     android:paddingVertical="8dp"
     android:gravity="center_vertical">
-
-    <!-- Nombre del Producto (Texto Principal Adaptativo) -->
+    <!-- Nombre del Producto -->
     <TextView
         android:id="@+id/tvItemProducto"
         android:layout_width="0dp"
@@ -16,8 +15,7 @@
         android:text="Producto X"
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="15sp" />
-
-    <!-- Cantidad (Texto Secundario Adaptativo) -->
+    <!-- Cantidad  -->
     <TextView
         android:id="@+id/tvItemCantidad"
         android:layout_width="0dp"
@@ -27,8 +25,7 @@
         android:text="Cant: 2"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="14sp" />
-
-    <!-- Subtotal (Resalta dinámicamente con el color del tema) -->
+    <!-- Subtotal -->
     <TextView
         android:id="@+id/tvItemSubtotal"
         android:layout_width="0dp"

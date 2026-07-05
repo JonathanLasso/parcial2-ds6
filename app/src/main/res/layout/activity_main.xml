@@ -10,7 +10,6 @@
     android:padding="24dp"
     android:background="?android:attr/colorBackground"
     tools:context=".MainActivity">
-
     <!-- Título Principal -->
     <TextView
         android:layout_width="match_parent"
@@ -20,7 +19,6 @@
         android:textColor="?android:attr/textColorPrimary"
         android:textSize="28sp"
         android:textStyle="bold" />
-
     <!-- Subtítulo -->
     <TextView
         android:layout_width="match_parent"
@@ -31,15 +29,13 @@
         android:layout_marginBottom="40dp"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="16sp" />
-
-    <!-- Contenedor de Botones (Ancho controlado) -->
+    <!-- Contenedor de Botones -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
         android:maxWidth="320dp">
-
         <!-- Botón Clientes -->
         <Button
             android:id="@+id/btnCliente"
@@ -51,7 +47,6 @@
             android:textAllCaps="false"
             android:backgroundTint="?attr/colorPrimary"
             android:textColor="?attr/colorOnPrimary" />
-
         <!-- Botón Productos -->
         <Button
             android:id="@+id/btnProducto"
@@ -63,7 +58,6 @@
             android:textAllCaps="false"
             android:backgroundTint="?attr/colorPrimary"
             android:textColor="?attr/colorOnPrimary" />
-
         <!-- Botón Órdenes -->
         <Button
             android:id="@+id/btnOrden"
@@ -75,8 +69,7 @@
             android:textAllCaps="false"
             android:backgroundTint="?attr/colorPrimary"
             android:textColor="?attr/colorOnPrimary" />
-
-        <!-- Botón de Salida con Estilo Outlined nativo -->
+        <!-- Botón de Salida -->
         <Button
             android:id="@+id/btnSalirApp"
             android:layout_width="match_parent"

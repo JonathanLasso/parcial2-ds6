@@ -9,28 +9,24 @@
     android:layout_marginVertical="6dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="2dp"
-    app:cardBackgroundColor="?attr/colorSurface"> <!-- Fondo adaptativo de la tarjeta -->
-
+    app:cardBackgroundColor="?attr/colorSurface">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
-
         <!-- ENCABEZADO: Info de la Orden y Botón Eliminar -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp">
-
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@id/btnEliminar"
                 android:orientation="vertical">
-
-                <!-- ID de la Orden (Texto Principal) -->
+                <!-- ID de la Orden -->
                 <TextView
                     android:id="@+id/tvHistorialIdOrden"
                     android:layout_width="wrap_content"
@@ -39,8 +35,7 @@
                     android:textColor="?android:attr/textColorPrimary"
                     android:textStyle="bold"
                     android:textSize="16sp" />
-
-                <!-- Fecha (Texto Secundario) -->
+                <!-- Fecha -->
                 <TextView
                     android:id="@+id/tvHistorialFecha"
                     android:layout_width="wrap_content"
@@ -49,8 +44,7 @@
                     android:textSize="12sp"
                     android:textColor="?android:attr/textColorSecondary" />
             </LinearLayout>
-
-            <!-- Botón Eliminar (Usa el colorError del tema) -->
+            <!-- Botón Eliminar -->
             <ImageButton
                 android:id="@+id/btnEliminar"
                 android:layout_width="36dp"
@@ -62,23 +56,20 @@
                 android:src="@android:drawable/ic_menu_close_clear_cancel"
                 app:tint="?attr/colorError" />
         </RelativeLayout>
-
-        <!-- Línea divisoria dinámica -->
+        <!-- Línea divisoria -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/textColorSecondary"
             android:alpha="0.15"/>
-
-        <!-- Contenedor dinámico de productos -->
+        <!-- Contenedor de productos -->
         <LinearLayout
             android:id="@+id/containerProductos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_marginVertical="4dp">
-
-            <!-- Ejemplo visual adaptativo de un producto -->
+            <!-- Ejemplo de un producto -->
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,24 +89,21 @@
                     android:textColor="?android:attr/textColorPrimary"/>
             </RelativeLayout>
         </LinearLayout>
-
-        <!-- Línea divisoria dinámica -->
+        <!-- Línea divisoria -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="?android:attr/textColorSecondary"
             android:alpha="0.15"
             android:layout_marginVertical="8dp" />
-
-        <!-- PIE DE PÁGINA: Estado y Total General -->
+        <!-- Estado y Total General -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
-
-            <!-- Estado de la Orden (Brilla elegantemente con el color primario) -->
+            <!-- Estado de la Orden -->
             <TextView
                 android:id="@+id/tvHistorialEstado"
                 android:layout_width="0dp"
@@ -128,14 +116,12 @@
                 android:singleLine="true"
                 android:ellipsize="end"
                 android:layout_marginEnd="8dp" />
-
             <!-- Contenedor del Total -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="bottom">
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -144,8 +130,7 @@
                     android:textSize="14sp"
                     android:textColor="?android:attr/textColorPrimary"
                     android:layout_marginEnd="4dp"/>
-
-                <!-- Valor total de la orden (Acoplado al color principal del tema) -->
+                <!-- Valor total de la orden -->
                 <TextView
                     android:id="@+id/tvHistorialTotal"
                     android:layout_width="wrap_content"
@@ -156,6 +141,5 @@
                     android:textColor="?attr/colorPrimary" />
             </LinearLayout>
         </LinearLayout>
-
     </LinearLayout>
 </androidx.cardview.widget.CardView>

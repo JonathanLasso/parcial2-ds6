@@ -9,13 +9,11 @@
     android:fillViewport="true"
     android:background="?android:attr/colorBackground"
     tools:context=".ActualizarProductoActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
-
         <!-- Título de la Pantalla -->
         <TextView
             android:id="@+id/tvTituloPantalla"
@@ -26,7 +24,6 @@
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
-
         <!-- Campo: Nombre del producto -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -34,7 +31,6 @@
             android:layout_marginTop="24dp"
             android:hint="Nombre del producto"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etNombre"
                 android:layout_width="match_parent"
@@ -42,7 +38,6 @@
                 android:inputType="textLongMessage"
                 android:textColor="?android:attr/textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <!-- Campo: Descripción -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -50,7 +45,6 @@
             android:layout_marginTop="16dp"
             android:hint="Descripción"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etDescripcion"
                 android:layout_width="match_parent"
@@ -58,7 +52,6 @@
                 android:inputType="textShortMessage"
                 android:textColor="?android:attr/textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <!-- Campo: Precio -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -66,7 +59,6 @@
             android:layout_marginTop="16dp"
             android:hint="Precio ($)"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPrecio"
                 android:layout_width="match_parent"
@@ -74,7 +66,6 @@
                 android:inputType="numberDecimal"
                 android:textColor="?android:attr/textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
-
         <!-- Campo: Precio -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -82,7 +73,6 @@
             android:layout_marginTop="16dp"
             android:hint="Cantidad"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etCantidad"
                 android:layout_width="match_parent"
@@ -90,8 +80,7 @@
                 android:inputType="numberDecimal"
                 android:textColor="?android:attr/textColorPrimary" />
         </com.google.android.material.textfield.TextInputLayout>
-
-        <!-- Botón Actualizar (Acción Principal Sólida) -->
+        <!-- Botón Actualizar -->
         <Button
             android:id="@+id/btnActualizar"
             android:layout_width="match_parent"
@@ -102,8 +91,7 @@
             android:textSize="16sp"
             app:backgroundTint="?attr/colorPrimary"
             android:textColor="?attr/colorOnPrimary" />
-
-        <!-- Botón Salir / Regresar (Estilo Outlined secundario) -->
+        <!-- Botón Salir / Regresar -->
         <Button
             android:id="@+id/btnSalir"
             android:layout_width="match_parent"
