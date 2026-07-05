@@ -30,13 +30,23 @@ class OrdenesAdapter(
             val id = cursor!!.getInt(cursor!!.getColumnIndexOrThrow("id"))
             val cliente = cursor!!.getString(cursor!!.getColumnIndexOrThrow("nombreCliente"))
             val fecha = cursor!!.getString(cursor!!.getColumnIndexOrThrow("fecha"))
+            val estado = cursor!!.getString(cursor!!.getColumnIndexOrThrow("estado"))
             val total = cursor!!.getDouble(cursor!!.getColumnIndexOrThrow("total"))
 
             // Asignación de datos principales
             holder.binding.tvHistorialIdOrden.text = "Orden #${id} - ${cliente}"
             holder.binding.tvHistorialFecha.text = "Fecha: $fecha"
+            holder.binding.tvHistorialEstado.text = "$estado"
             holder.binding.tvHistorialTotal.text = String.format(Locale.US, "$%.2f", total)
-
+            // --- CAMBIO DINÁMICO DE COLOR SEGÚN EL ESTADO ---
+            val colorEstado = when (estado.lowercase(Locale.ROOT).trim()) {
+                "pendiente" -> "#FF9800"  // Naranja
+                "procesado" -> "#2196F3"  // Azul
+                "completado" -> "#4CAF50" // Verde
+                "cancelado" -> "#F44336"  // Rojo
+                else -> "#757575"         // Gris por defecto si no coincide
+            }
+            holder.binding.tvHistorialEstado.setTextColor(android.graphics.Color.parseColor(colorEstado))
             // --- CARGA DINÁMICA DE PRODUCTOS ---
             // 1. Limpiamos cualquier vista previa que haya quedado por el reciclaje de celdas
             holder.binding.containerProductos.removeAllViews()

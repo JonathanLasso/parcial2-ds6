@@ -6,78 +6,138 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
     tools:context=".GestionProductosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp"> <!-- Padding unificado para consistencia visual -->
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Registro de producto"
-            android:textSize="20sp"
+            android:text="Registro de Producto"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
-        <EditText
-            android:id="@+id/etNombre"
+        <!-- Campo: Nombre del producto -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:hint="Nombre del producto"/>
+            android:hint="Nombre del producto"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/etDescripcion"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Descripción del producto -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Descripción del producto"/>
+            android:hint="Descripción del producto"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <EditText
-            android:id="@+id/etPrecio"
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Precio del producto -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Precio del producto"
-            android:inputType="numberDecimal"/>
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Cantidad del producto -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Cantidad del producto"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón Guardar (Color primario sólido) -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Registrar Producto" />
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="Guardar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
 
+        <!-- Botón Regresar (Estilo Outlined) -->
         <Button
             android:id="@+id/btnRegresar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Regresar al menú principal" />
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="Regresar al menú principal"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
 
+        <!-- Línea divisoria dinámica adaptativa -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="#CCCCCC"
-            android:layout_marginBottom="24dp" />
+            android:layout_marginTop="28dp"
+            android:background="?android:attr/textColorSecondary"
+            android:alpha="0.15"
+            android:layout_marginBottom="28dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Listado de Productos"
-            android:textSize="20sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
+        <!-- RecyclerView configurado con nestedScrollingEnabled false para evitar tirones dentro del ScrollView -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProductos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
+            android:layout_marginTop="16dp"
             tools:listitem="@layout/item_producto" />
 
         <TextView
@@ -88,7 +148,7 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="No hay productos registrados."
-            android:textColor="#757575"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="16sp"
             android:textStyle="italic"
             android:visibility="gone" />

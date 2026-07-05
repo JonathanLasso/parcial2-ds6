@@ -134,7 +134,7 @@ class GestionOrdenesActivity : AppCompatActivity() {
     private fun obtenerCursorHistorialOrdenes(): Cursor {
         val db = dbHelper.readableDatabase
         return db.rawQuery(
-            "SELECT o.id, o.fecha, o.total, c.nombre AS nombreCliente FROM ordenes o INNER JOIN clientes c ON o.idCliente = c.id",
+            "SELECT o.id, o.fecha, o.estado, o.total, c.nombre AS nombreCliente FROM ordenes o INNER JOIN clientes c ON o.idCliente = c.id",
             null
         )
     }
@@ -169,21 +169,34 @@ class GestionOrdenesActivity : AppCompatActivity() {
             val cursorProducto = itemSeleccionado as Cursor
             val idProducto = cursorProducto.getInt(cursorProducto.getColumnIndexOrThrow("_id"))
             val nombreProducto = cursorProducto.getString(cursorProducto.getColumnIndexOrThrow("nombreProducto"))
+
             val db = dbHelper.readableDatabase
-            val consulta = db.rawQuery("SELECT precio FROM productos WHERE id = ?", arrayOf(idProducto.toString()))
+            // 1. Modificamos la consulta para traer también el stock actual
+            val consulta = db.rawQuery("SELECT precio, cantidad FROM productos WHERE id = ?", arrayOf(idProducto.toString()))
+
             if (consulta.moveToFirst()) {
                 val precio = consulta.getDouble(consulta.getColumnIndexOrThrow("precio"))
+                val cantidadActual = consulta.getInt(consulta.getColumnIndexOrThrow("cantidad")) // Asegúrate de que tu columna se llame 'stock' o 'cantidad'
+
+                // 2. Primera validación: ¿Hay suficiente stock físico para agregar al carrito?
+                if (cantidad > cantidadActual) {
+                    Toast.makeText(this, "Stock insuficiente. Disponible: $cantidadActual", Toast.LENGTH_LONG).show()
+                    consulta.close()
+                    return@setOnClickListener
+                }
+
                 val subtotal = precio * cantidad
                 val nuevoDetalle = DetalleOrdenTemporal(idProducto, nombreProducto, cantidad, precio, subtotal)
                 listaDetallesTemporales.add(nuevoDetalle)
                 detalleAdapter.notifyItemInserted(listaDetallesTemporales.size - 1)
                 totalGeneralOrden += subtotal
                 binding.tvTotalGeneral.text = String.format(Locale.US, "$%.2f", totalGeneralOrden)
-                binding.etCantidad.text.clear()
+                binding.etCantidad.text?.clear()
                 Toast.makeText(this, "Añadido al resumen.", Toast.LENGTH_SHORT).show()
             }
             consulta.close()
         }
+
         binding.btnGuardarOrden.setOnClickListener {
             val clienteSeleccionado = binding.spClientes.selectedItem
             if (clienteSeleccionado == null) {
@@ -199,27 +212,55 @@ class GestionOrdenesActivity : AppCompatActivity() {
             val fecha = binding.etFecha.text.toString()
             val cursorCliente = clienteSeleccionado as Cursor
             val idCliente = cursorCliente.getInt(cursorCliente.getColumnIndexOrThrow("_id"))
+
             val db = dbHelper.writableDatabase
             db.beginTransaction()
             try {
+                // 3. Segunda validación (Filtro de seguridad dentro de la transacción)
+                // Verificamos producto por producto antes de alterar nada
+                for (det in listaDetallesTemporales) {
+                    val c = db.rawQuery("SELECT cantidad FROM productos WHERE id = ?", arrayOf(det.idProducto.toString()))
+                    if (c.moveToFirst()) {
+                        val cantidadReal = c.getInt(c.getColumnIndexOrThrow("cantidad"))
+                        if (det.cantidad > cantidadReal) {
+                            Toast.makeText(this, "Error: El producto '${det.nombreProducto}' ya no tiene stock suficiente (Disponible: $cantidadReal).", Toast.LENGTH_LONG).show()
+                            c.close()
+                            return@setOnClickListener // Cancela el click y no hace el commit de la transacción
+                        }
+                    }
+                    c.close()
+                }
+
+                // Si pasó la verificación de todos los productos, procedemos a insertar la orden
                 val datosOrden = ContentValues().apply {
                     put("idCliente", idCliente)
                     put("fecha", fecha)
                     put("estado", "Pendiente")
                     put("total", totalGeneralOrden)
                 }
+
                 val idOrdenGenerado = db.insert("ordenes", null, datosOrden)
                 if (idOrdenGenerado != -1L) {
                     for (det in listaDetallesTemporales) {
+                        // Insertar en detalleOrden
                         val datosDetalle = ContentValues().apply {
                             put("idOrden", idOrdenGenerado.toInt())
                             put("idProducto", det.idProducto)
                             put("cantidad", det.cantidad)
                         }
                         db.insert("detalleOrden", null, datosDetalle)
+
+                        // 4. Actualizar el stock restando la cantidad vendida
+                        db.execSQL(
+                            "UPDATE productos SET cantidad = cantidad - ? WHERE id = ?",
+                            arrayOf(det.cantidad.toString(), det.idProducto.toString())
+                        )
                     }
-                    db.setTransactionSuccessful()
+
+                    db.setTransactionSuccessful() // Confirma la orden y el nuevo stock
                     Toast.makeText(this, "Orden #$idOrdenGenerado registrada con éxito.", Toast.LENGTH_SHORT).show()
+
+                    // Limpieza de interfaz
                     listaDetallesTemporales.clear()
                     detalleAdapter.notifyDataSetChanged()
                     totalGeneralOrden = 0.0

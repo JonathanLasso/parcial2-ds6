@@ -1,110 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?android:attr/colorBackground"
     tools:context=".GestionOrdenesActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp"> <!-- Padding unificado -->
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Registrar Orden"
-            android:textSize="20sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="20dp"
             android:text="Seleccionar Cliente:"
+            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spClientes"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="6dp" />
 
-        <EditText
-            android:id="@+id/etFecha"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Fecha (Automática/Seleccionable)"
-            android:focusable="false"
-            android:clickable="true"
-            android:inputType="date" />
-
-        <TextView
+        <!-- Campo: Fecha -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:hint="Fecha (Automática/Seleccionable)"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFecha"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="date"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Sección agregar detalles -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:gravity="center"
             android:text="Agregar Productos a la Orden"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:text="Seleccionar Producto:"
+            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spProductos"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginTop="4dp" />
+            android:layout_marginTop="6dp" />
 
-        <EditText
-            android:id="@+id/etCantidad"
+        <!-- Campo: Cantidad -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:hint="Cantidad"
-            android:inputType="number" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón secundario para agregar ítem -->
         <Button
             android:id="@+id/btnAgregarProducto"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Agregar Detalle de Orden" />
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="Agregar Detalle de Orden"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="Detalles añadidos a esta orden:"
+            android:textColor="?android:attr/textColorPrimary"
             android:textStyle="bold" />
 
+        <!-- CLAVE 1: nestedScrollingEnabled en false -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetallesActuales"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:nestedScrollingEnabled="true"
             tools:listitem="@layout/item_detalle_orden" />
 
+        <!-- Fila de Total General -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:gravity="end">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TOTAL GENERAL: "
+                android:textColor="?android:attr/textColorPrimary"
                 android:textStyle="bold"
                 android:textSize="16sp"/>
 
@@ -114,23 +149,38 @@
                 android:layout_height="wrap_content"
                 android:text="$0.00"
                 android:textStyle="bold"
-                android:textColor="#E91E63"
+                android:textColor="?attr/colorPrimary"
                 android:textSize="16sp"/>
         </LinearLayout>
 
+        <!-- Botón guardar orden -->
         <Button
             android:id="@+id/btnGuardarOrden"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Guardar Orden" />
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="Guardar Orden"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <!-- Línea divisoria adaptativa -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="28dp"
+            android:background="?android:attr/textColorSecondary"
+            android:alpha="0.15"
+            android:layout_marginBottom="28dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Historial de Órdenes"
-            android:textSize="20sp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
             android:textStyle="bold"/>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -149,16 +199,22 @@
             android:layout_marginBottom="24dp"
             android:gravity="center"
             android:text="No hay órdenes registradas."
-            android:textColor="#757575"
+            android:textColor="?android:attr/textColorSecondary"
             android:textSize="16sp"
             android:textStyle="italic"
             android:visibility="gone" />
 
+        <!-- Botón regresar al menú -->
         <Button
             android:id="@+id/btnRegresarAlMenu"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:text="Regresar al menú principal" />
+            android:text="Regresar al menú principal"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
     </LinearLayout>
 </ScrollView>

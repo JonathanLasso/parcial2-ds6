@@ -64,10 +64,10 @@ class GestionClientesActivity : AppCompatActivity() {
                 db.close()
                 if(resultado != -1L){
                     Toast.makeText(applicationContext, "Datos guardados con éxito.", Toast.LENGTH_SHORT).show()
-                    binding.etNombre.text.clear()
-                    binding.etCorreo.text.clear()
-                    binding.etTelefono.text.clear()
-                    binding.etDireccion.text.clear()
+                    binding.etNombre.text?.clear()
+                    binding.etCorreo.text?.clear()
+                    binding.etTelefono.text?.clear()
+                    binding.etDireccion.text?.clear()
                     // Actualizamos el Adapter con un Cursor nuevo
                     refrescarListaClientes()
                 }

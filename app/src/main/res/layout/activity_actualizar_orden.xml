@@ -1,118 +1,197 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="?android:attr/colorBackground"
     tools:context=".ActualizarOrdenActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp">
+
+        <!-- Título de la Pantalla -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Actualizar Orden"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- SECCIÓN 1: Datos Básicos de la Orden -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="Actualizar Orden"
-            android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:text="Cliente de la Orden:"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="8dp" />
 
-        <TextView
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="?android:attr/textColorSecondary">
+
+            <Spinner
+                android:id="@+id/spClientesModificar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp" />
+        </FrameLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Cliente de la Orden:"
-            android:textStyle="bold" />
+            android:hint="Fecha de la Orden"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
-        <Spinner
-            android:id="@+id/spClientesModificar"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etFechaModificar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="date"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
-            android:id="@+id/etFechaModificar"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint="Fecha de la Orden"
-            android:focusable="false"
-            android:clickable="true"
-            android:inputType="date" />
+            android:text="Estado de la Orden:"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp" />
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="?android:attr/textColorSecondary">
+
+            <Spinner
+                android:id="@+id/spEstadoModificar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp" />
+        </FrameLayout>
+
+        <!-- SECCIÓN 2: Añadir Productos de forma Interactiva -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="#CCCCCC" />
+            android:background="?android:attr/textColorSecondary"
+            android:alpha="0.15"
+            android:layout_marginVertical="24dp" />
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
             android:text="Añadir más Productos"
+            android:textColor="?android:attr/textColorPrimary"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:layout_gravity="center"
+            android:layout_marginBottom="12dp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:text="Seleccionar Producto:"
+            android:textColor="?android:attr/textColorSecondary"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
-        <Spinner
-            android:id="@+id/spProductosModificar"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:layout_marginTop="4dp" />
+            android:layout_height="56dp"
+            android:layout_marginTop="6dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:backgroundTint="?android:attr/textColorSecondary">
 
-        <EditText
-            android:id="@+id/etCantidadModificar"
+            <Spinner
+                android:id="@+id/spProductosModificar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="8dp" />
+        </FrameLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:hint="Cantidad"
-            android:inputType="number" />
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCantidadModificar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón para añadir a la lista (Estilo Delineado para equilibrar pesos) -->
         <Button
             android:id="@+id/btnAgregarProductoModificar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Agregar Producto al Detalle" />
+            android:layout_height="52dp"
+            android:layout_marginTop="16dp"
+            android:text="Agregar Producto al Detalle"
+            android:textAllCaps="false"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
 
+        <!-- SECCIÓN 3: Tabla de Detalles y Totalización -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:text="Detalles cargados / modificados:"
-            android:textStyle="bold" />
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="8dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvDetallesModificar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
+            android:nestedScrollingEnabled="true"
             tools:listitem="@layout/item_detalle_orden" />
 
+        <!-- Fila de Total Adaptativa -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="12dp"
-            android:gravity="end">
+            android:layout_marginTop="16dp"
+            android:gravity="end"
+            android:paddingVertical="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TOTAL ACTUALIZADO: "
+                android:textColor="?android:attr/textColorPrimary"
                 android:textStyle="bold"
-                android:textSize="16sp"/>
+                android:textSize="15sp"/>
 
             <TextView
                 android:id="@+id/tvTotalGeneralModificar"
@@ -120,22 +199,33 @@
                 android:layout_height="wrap_content"
                 android:text="$0.00"
                 android:textStyle="bold"
-                android:textColor="#E91E63"
-                android:textSize="16sp"/>
+                android:textColor="?attr/colorPrimary"
+                android:textSize="17sp"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/btnActualizarOrden"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Guardar Cambios de la Orden" />
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="Actualizar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <!-- Botón Regresar Delineado Secundario -->
         <Button
             android:id="@+id/btnRegresar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Regresar a la gestión de órdenes" />
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="Regresar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
 
     </LinearLayout>
 </ScrollView>

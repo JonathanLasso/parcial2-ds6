@@ -7,49 +7,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="?android:attr/colorBackground"
     tools:context=".ActualizarProductoActivity">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="24dp">
+
+        <!-- Título de la Pantalla -->
         <TextView
             android:id="@+id/tvTituloPantalla"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Actualizar producto"
-            android:textSize="24sp"
+            android:text="Actualizar Producto"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold"
             android:layout_gravity="center"/>
-        <EditText
-            android:id="@+id/etNombre"
+
+        <!-- Campo: Nombre del producto -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:hint="Nombre del producto"
-            android:layout_marginTop="24dp" />
-        <EditText
-            android:id="@+id/etDescripcion"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etNombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textLongMessage"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Descripción -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:hint="Descripción"
-            android:layout_marginTop="16dp" />
-        <EditText
-            android:id="@+id/etPrecio"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textShortMessage"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Precio -->
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Precio"
-            android:inputType="numberDecimal"
-            android:layout_marginTop="16dp" />
+            android:layout_marginTop="16dp"
+            android:hint="Precio ($)"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPrecio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Campo: Precio -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Cantidad"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCantidad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:textColor="?android:attr/textColorPrimary" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Botón Actualizar (Acción Principal Sólida) -->
         <Button
             android:id="@+id/btnActualizar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Actualizar producto"
-            android:layout_marginTop="16dp" />
+            android:layout_height="56dp"
+            android:layout_marginTop="24dp"
+            android:text="Actualizar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            app:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <!-- Botón Salir / Regresar (Estilo Outlined secundario) -->
         <Button
             android:id="@+id/btnSalir"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Regresar al gestión de productos"
-            android:layout_marginTop="16dp" />
+            android:layout_height="56dp"
+            android:layout_marginTop="12dp"
+            android:text="Regresar"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:textColor="?attr/colorPrimary"
+            app:strokeColor="?attr/colorPrimary" />
     </LinearLayout>
 </ScrollView>

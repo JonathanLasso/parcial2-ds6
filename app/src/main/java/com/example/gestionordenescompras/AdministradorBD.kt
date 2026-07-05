@@ -8,7 +8,7 @@ class AdministradorBD(context: Context) : SQLiteOpenHelper (
     context,
     "gestionOrdenesCompras.db",
     null,
-    4
+    6
 ) {
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(
@@ -28,7 +28,8 @@ class AdministradorBD(context: Context) : SQLiteOpenHelper (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 nombreProducto TEXT NOT NULL,
                 descripcion TEXT NOT NULL,
-                precio REAL NOT NULL
+                precio REAL NOT NULL,
+                cantidad INTEGER NOT NULL
                 )
             """.trimIndent()
         )

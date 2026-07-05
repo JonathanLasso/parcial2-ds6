@@ -6,8 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="4dp"
     android:layout_marginVertical="6dp"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="3dp">
+    app:cardCornerRadius="12dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="?attr/colorSurface"> <!-- Fondo adaptativo para la tarjeta -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -25,7 +26,7 @@
             android:orientation="vertical"
             android:layout_marginEnd="8dp">
 
-            <!-- Nombre del Producto -->
+            <!-- Nombre del Producto (Texto Principal) -->
             <TextView
                 android:id="@+id/tvNombreProducto"
                 android:layout_width="wrap_content"
@@ -33,31 +34,56 @@
                 android:text="Nombre del Producto"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#333333"/>
+                android:textColor="?android:attr/textColorPrimary"/>
 
-            <!-- Descripción -->
+            <!-- Descripción (Texto Secundario) -->
             <TextView
                 android:id="@+id/tvDescripcionProducto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Descripción breve del producto aquí"
                 android:textSize="14sp"
-                android:layout_marginTop="2dp"
-                android:textColor="#666666"/>
+                android:layout_marginTop="4dp"
+                android:textColor="?android:attr/textColorSecondary"/>
 
-            <!-- Precio -->
-            <TextView
-                android:id="@+id/tvPrecioProducto"
-                android:layout_width="wrap_content"
+            <!-- Fila para Precio y Stock alineados -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="$0.00"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#2E7D32"
-                android:layout_marginTop="4dp"/>
+                android:orientation="horizontal"
+                android:layout_marginTop="6dp"
+                android:gravity="center_vertical">
+
+                <!-- Precio (Resalta dinámicamente con el color del tema) -->
+                <TextView
+                    android:id="@+id/tvPrecioProducto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:textColor="?attr/colorPrimary"/>
+
+                <!-- Espacio intermedio adaptable -->
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_weight="1" />
+
+                <!-- Stock Disponible (Texto Secundario) -->
+                <TextView
+                    android:id="@+id/tvStockProducto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stock: 12 u."
+                    android:textSize="13sp"
+                    android:textStyle="italic"
+                    android:textColor="?android:attr/textColorSecondary"
+                    android:layout_marginEnd="4dp"/>
+            </LinearLayout>
         </LinearLayout>
 
-        <!-- Botón Eliminar (Se mantiene igual al de cliente) -->
+        <!-- Botón Eliminar (Adaptado con el colorError del tema) -->
         <ImageButton
             android:id="@+id/btnEliminarProducto"
             android:layout_width="40dp"
@@ -65,7 +91,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Eliminar producto"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
-            app:tint="#D32F2F" />
+            app:tint="?attr/colorError" />
 
     </LinearLayout>
 

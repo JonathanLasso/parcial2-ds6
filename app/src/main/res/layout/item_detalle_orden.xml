@@ -3,23 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:paddingHorizontal="12dp"
+    android:paddingVertical="8dp"
+    android:gravity="center_vertical">
 
+    <!-- Nombre del Producto (Texto Principal Adaptativo) -->
     <TextView
         android:id="@+id/tvItemProducto"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
-        android:text="Producto X" />
+        android:text="Producto X"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="15sp" />
 
+    <!-- Cantidad (Texto Secundario Adaptativo) -->
     <TextView
         android:id="@+id/tvItemCantidad"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Cant: 2" />
+        android:text="Cant: 2"
+        android:textColor="?android:attr/textColorSecondary"
+        android:textSize="14sp" />
 
+    <!-- Subtotal (Resalta dinámicamente con el color del tema) -->
     <TextView
         android:id="@+id/tvItemSubtotal"
         android:layout_width="0dp"
@@ -27,5 +36,7 @@
         android:layout_weight="1"
         android:gravity="end"
         android:text="$0.00"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="15sp" />
 </LinearLayout>

@@ -11,22 +11,36 @@ fun Activity.configurarBotonRegresar(boton: android.view.View, destino: Class<*>
         finish()
     }
 }
-fun Activity.mostrarDialogoConfirmacion(id: Int, nombre: String, funcionEliminar: (Int) -> Unit) {
+fun Activity.mostrarDialogoConfirmacion(
+    id: Int,
+    nombre: String? = null,
+    funcionEliminar: (Int) -> Unit
+) {
     val builder = AlertDialog.Builder(this)
     builder.setTitle("Eliminar")
-    builder.setMessage("¿Estás seguro de que deseas eliminar a $nombre de la base de datos?")
 
-    // Si el usuario confirma la acción
+    // Personalizamos el mensaje dinámicamente según la Activity que invoque la función
+    val mensaje = when (this) {
+        // Si se llama desde la pantalla de Clientes
+        is GestionClientesActivity -> "¿Estás seguro de que deseas eliminar al cliente $nombre de la base de datos?"
+
+        // Si se llama desde la pantalla de Productos
+        is GestionProductosActivity -> "¿Estás seguro de que deseas eliminar el producto $nombre (ID: $id)?"
+
+        // Si se llama desde la pantalla de Pedidos (u otra donde nombre sea null)
+        else -> "¿Estás seguro de que deseas eliminar el pedido N° $id?"
+    }
+
+    builder.setMessage(mensaje)
+
     builder.setPositiveButton("Eliminar") { dialog, _ ->
-        funcionEliminar(id) // Ejecuta la lógica de eliminación de esa Activity
+        funcionEliminar(id)
         dialog.dismiss()
     }
 
-    // Si el usuario cancela
     builder.setNegativeButton("Cancelar") { dialog, _ ->
         dialog.dismiss()
     }
 
-    val dialog = builder.create()
-    dialog.show()
+    builder.create().show()
 }

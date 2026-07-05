@@ -51,11 +51,12 @@ class GestionProductosActivity : AppCompatActivity() {
             val nombre = binding.etNombre.text.toString()
             val descripcion = binding.etDescripcion.text.toString()
             val precio = binding.etPrecio.text.toString().toDouble()
+            val cantidad = binding.etCantidad.text.toString().toInt()
             if(nombre.isEmpty() || descripcion.isEmpty()){
                 Toast.makeText(applicationContext, "No se permiten campos vacios.", Toast.LENGTH_SHORT).show()
             }
-            else if(precio <= 0){
-                Toast.makeText(applicationContext, "No se permiten precios menores o iguales a 0.", Toast.LENGTH_SHORT).show()
+            else if(precio <= 0.00 || cantidad <= 0){
+                Toast.makeText(applicationContext, "No se permiten precios ni cantidades menores o iguales a 0.", Toast.LENGTH_SHORT).show()
             }
             else{
                 val admin = AdministradorBD(this)
@@ -64,14 +65,16 @@ class GestionProductosActivity : AppCompatActivity() {
                     put("nombreProducto",nombre)
                     put("descripcion",descripcion)
                     put("precio",precio)
+                    put("cantidad",cantidad)
                 }
                 val resultado = db.insert("productos",null,datos)
                 db.close()
                 if(resultado != -1L){
                     Toast.makeText(applicationContext, "Datos guardados con éxito.", Toast.LENGTH_SHORT).show()
-                    binding.etNombre.text.clear()
-                    binding.etDescripcion.text.clear()
-                    binding.etPrecio.text.clear()
+                    binding.etNombre.text?.clear()
+                    binding.etDescripcion.text?.clear()
+                    binding.etPrecio.text?.clear()
+                    binding.etCantidad.text?.clear()
                     // Actualizamos el adaptador con un Cursor nuevo
                     refrescarListaProductos()
                 }

@@ -84,6 +84,7 @@ class ActualizarClienteActivity : AppCompatActivity() {
 
             if (filasAfectadas > 0) {
                 Toast.makeText(this, "Cliente actualizado con éxito.", Toast.LENGTH_SHORT).show()
+                finish()
             } else {
                 Toast.makeText(this, "Error al actualizar los datos.", Toast.LENGTH_SHORT).show()
             }

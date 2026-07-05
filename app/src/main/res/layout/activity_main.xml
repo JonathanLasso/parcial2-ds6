@@ -8,55 +8,86 @@
     android:orientation="vertical"
     android:gravity="center"
     android:padding="24dp"
+    android:background="?android:attr/colorBackground"
     tools:context=".MainActivity">
 
+    <!-- Título Principal -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Gestión de Órdenes de Compras"
+        android:text="Gestión de Órdenes\nde Compras"
+        android:textColor="?android:attr/textColorPrimary"
         android:textSize="28sp"
         android:textStyle="bold" />
 
+    <!-- Subtítulo -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Elige ¿qué acción quieres hacer?"
         android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="32dp"
-        android:textSize="18sp" />
-
-    <Button
-        android:id="@+id/btnCliente"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_marginVertical="8dp"
-        android:text="Clientes"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="40dp"
+        android:textColor="?android:attr/textColorSecondary"
         android:textSize="16sp" />
 
-    <Button
-        android:id="@+id/btnProducto"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_marginVertical="8dp"
-        android:text="Productos"
-        android:textSize="16sp" />
+    <!-- Contenedor de Botones (Ancho controlado) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:maxWidth="320dp">
 
-    <Button
-        android:id="@+id/btnOrden"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_marginVertical="8dp"
-        android:text="Órdenes"
-        android:textSize="16sp" />
+        <!-- Botón Clientes -->
+        <Button
+            android:id="@+id/btnCliente"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginVertical="8dp"
+            android:text="Clientes"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
 
-    <Button
-        android:id="@+id/btnSalirApp"
-        android:layout_width="300dp"
-        android:layout_height="56dp"
-        android:layout_marginVertical="8dp"
-        android:text="Salir de la app"
-        android:textSize="16sp" />
+        <!-- Botón Productos -->
+        <Button
+            android:id="@+id/btnProducto"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginVertical="8dp"
+            android:text="Productos"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <!-- Botón Órdenes -->
+        <Button
+            android:id="@+id/btnOrden"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginVertical="8dp"
+            android:text="Órdenes"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:backgroundTint="?attr/colorPrimary"
+            android:textColor="?attr/colorOnPrimary" />
+
+        <!-- Botón de Salida con Estilo Outlined nativo -->
+        <Button
+            android:id="@+id/btnSalirApp"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginVertical="16dp"
+            android:text="Salir de la app"
+            android:textSize="16sp"
+            android:textAllCaps="false"
+            android:textColor="?attr/colorError"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    </LinearLayout>
 
 </LinearLayout>

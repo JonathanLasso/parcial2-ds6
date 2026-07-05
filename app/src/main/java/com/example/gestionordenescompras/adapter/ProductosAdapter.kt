@@ -25,10 +25,12 @@ class ProductosAdapter(private var cursor: Cursor?,
             val nombre = cursor!!.getString(cursor!!.getColumnIndexOrThrow("nombreProducto"))
             val descripcion = cursor!!.getString(cursor!!.getColumnIndexOrThrow("descripcion"))
             val precio = cursor!!.getString(cursor!!.getColumnIndexOrThrow("precio"))
+            val cantidad = cursor!!.getString(cursor!!.getColumnIndexOrThrow("cantidad"))
             // Pintamos la vista
             holder.binding.tvNombreProducto.text = nombre
             holder.binding.tvDescripcionProducto.text = descripcion
             holder.binding.tvPrecioProducto.text = "$$precio"
+            holder.binding.tvStockProducto.text = "Stock: $cantidad"
             // Evento click: mandamos el ID extraído del Cursor
             holder.binding.root.setOnClickListener {
                 onProductoClick(id)
